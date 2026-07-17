@@ -182,16 +182,6 @@ chmod +x initialize.sh
 ./initialize.sh
 ~~~
 
-**部署腳本執行細節：**
-1. 偵測 Python 版本，低於 3.12 則自動啟用 PPA 安裝最新 Python 3.12。
-2. 安裝生產環境所需軟體元件 (Nginx, Gunicorn 等)。
-3. 使用適當的 Python 版本自動建立本地獨立虛擬環境。
-4. 自動安裝所有專案依賴套件 (`requirements.txt`)。
-5. 配置系統環境變數，並自動建立 SQLite 資料庫。
-6. 設定 Nginx 網頁伺服器設定，並在備妥 SSL 憑證下自動套用。
-7. 自動初始化資料庫（寫入 43 個預設科室部門與感染性廢棄物類型）。
-8. 設定 logrotate 日誌自動輪替與歸檔機制。
-
 ---
 
 ### SSL/HTTPS 安全憑證配置
@@ -227,15 +217,6 @@ sudo nginx -t
 sudo systemctl reload nginx
 ~~~
 
-#### 啟用 Django 生產環境安全參數
-編輯生產環境之 `.env.production`，將以下變數設為 `True` 以啟用嚴格瀏覽器安全政策：
-
-~~~properties
-SECURE_SSL_REDIRECT=True
-SESSION_COOKIE_SECURE=True
-CSRF_COOKIE_SECURE=True
-~~~
-
 ---
 
 ### 智慧日誌系統與自動歸檔
@@ -245,11 +226,6 @@ CSRF_COOKIE_SECURE=True
 * **實時操作日誌**：`logs/latest.log` (記錄使用者在系統內進行的所有勾稽、警報確認與操作審計)
 * **調試詳細日誌**：`logs/debug.log` (僅開發模式下寫入詳細偵錯日誌)
 * **錯誤追蹤日誌**：`logs/error.log` (記錄系統拋出之非預期例外或錯誤)
-
-#### 日誌歸檔與輪替控制 (`logrotate`)
-為防止日誌檔案無限制增長導致伺服器磁碟空間耗盡，系統設有以下自動輪替機制：
-* 每次伺服器重新啟動時，會自動打包舊有日誌：命名格式 `YYYY-MM-DD-N.tar.gz`。
-* 系統中每日最大保留 7 個歸檔封包，避免儲存溢出。
 
 ---
 
@@ -273,8 +249,42 @@ workers = 9
 ## 🛠️ 常用系統維護指令表
 
 ### Django 系統維護
-```bash
+~~~bash
 source .venv/bin/activate             # 啟動 Python 虛擬環境
 python manage.py migrate              # 執行資料庫遷移
 python manage.py init_system          # 初始化預設系統設定與科室資料
 python manage.py collectstatic        # 彙整前端靜態網頁檔案
+~~~
+
+### 服務生命週期控制
+~~~bash
+./start-server.sh                     # 啟動 Gunicorn 及背景服務 (含重複啟動防護)
+./stop-server.sh                      # 安全且優雅關閉伺服器 (附10秒優雅退場緩衝)
+sudo systemctl restart nginx          # 重新啟動 Nginx 網頁伺服器
+~~~
+
+---
+
+## 📋 上線前安全檢查清單 (Pre-launch Checklist)
+
+- [ ] **DEBUG 模式關閉：** 確認 `.env.production` 中 `DEBUG=False`。
+- [ ] **金鑰保密：** `SECRET_KEY` 已重構為強隨機高強度金鑰，且 `.env.production` 權限已設為 `600`。
+- [ ] **SSL 加密就緒：** HTTPS 安全憑證安裝無誤。
+- [ ] **資料庫 WAL 啟用：** 資料庫讀寫測試正常。
+
+---
+
+## 🔍 常見問題與排除 (FAQ)
+
+### 無法訪問網站（Nginx 沒反應）
+1. 檢查 Gunicorn 本地服務是否正常運作：`ps aux | grep gunicorn`
+2. 確認 Nginx 伺服器端狀態：`sudo systemctl status nginx`
+
+### 502 Bad Gateway 錯誤
+* **排除步驟**：
+  1. 確認 Gunicorn 是否監聽本地 `8000` port：`netstat -tlnp | grep 8000`
+  2. 檢查 `logs/error.log` 查看 Django 崩潰原因。
+  3. 重啟系統服務：`./stop-server.sh && ./start-server.sh`
+
+### 資料庫發生 Lock 鎖定錯誤
+* **排除步驟**：優雅關閉所有進程，待解鎖後重啟即可恢復：`./stop-server.sh`，確認完全無殘留 `gunicorn` 或 `python` 程序後，重啟 `./start-server.sh`。
