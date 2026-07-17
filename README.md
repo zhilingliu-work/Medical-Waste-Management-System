@@ -2,11 +2,11 @@
 ## 基於 Django 5.1.6 與物聯網全流程勾稽之智慧化醫療廢棄物安全管理系統
 
 <p align="center">
-  <img src="[https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python&logoColor=white](https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python&logoColor=white)" alt="Python Version">
-  <img src="[https://img.shields.io/badge/Django-5.1.6-092E20?style=for-the-badge&logo=django&logoColor=white](https://img.shields.io/badge/Django-5.1.6-092E20?style=for-the-badge&logo=django&logoColor=white)" alt="Django">
-  <img src="[https://img.shields.io/badge/Platform-Ubuntu%20%7C%20Windows%2011-0078d4?style=for-the-badge&logo=windows&logoColor=white](https://img.shields.io/badge/Platform-Ubuntu%20%7C%20Windows%2011-0078d4?style=for-the-badge&logo=windows&logoColor=white)" alt="Platform">
-  <img src="[https://img.shields.io/badge/Architecture-RBAC%20Compliant-orange?style=for-the-badge](https://img.shields.io/badge/Architecture-RBAC%20Compliant-orange?style=for-the-badge)" alt="Architecture">
-  <img src="[https://img.shields.io/badge/Security-SSL%20Protected-red?style=for-the-badge](https://img.shields.io/badge/Security-SSL%20Protected-red?style=for-the-badge)" alt="Security">
+  <img src="https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python Version">
+  <img src="https://img.shields.io/badge/Django-5.1.6-092E20?style=for-the-badge&logo=django&logoColor=white" alt="Django">
+  <img src="https://img.shields.io/badge/Platform-Ubuntu%20%7C%20Windows%2011-0078d4?style=for-the-badge&logo=windows&logoColor=white" alt="Platform">
+  <img src="https://img.shields.io/badge/Architecture-RBAC%20Compliant-orange?style=for-the-badge" alt="Architecture">
+  <img src="https://img.shields.io/badge/Security-SSL%20Protected-red?style=for-the-badge" alt="Security">
 </p>
 
 ## 📌 專案與作者資訊
