@@ -2,11 +2,11 @@
 ## 基於 Django 5.1.6 與物聯網全流程勾稽之智慧化醫療廢棄物安全管理系統
 
 <p align="center">
-  <img src="[https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python&logoColor=white](https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python&logoColor=white)" alt="Python Version">
-  <img src="[https://img.shields.io/badge/Django-5.1.6-092E20?style=for-the-badge&logo=django&logoColor=white](https://img.shields.io/badge/Django-5.1.6-092E20?style=for-the-badge&logo=django&logoColor=white)" alt="Django">
-  <img src="[https://img.shields.io/badge/Platform-Ubuntu%20%7C%20Windows%2011-0078d4?style=for-the-badge&logo=windows&logoColor=white](https://img.shields.io/badge/Platform-Ubuntu%20%7C%20Windows%2011-0078d4?style=for-the-badge&logo=windows&logoColor=white)" alt="Platform">
-  <img src="[https://img.shields.io/badge/Architecture-RBAC%20Compliant-orange?style=for-the-badge](https://img.shields.io/badge/Architecture-RBAC%20Compliant-orange?style=for-the-badge)" alt="Architecture">
-  <img src="[https://img.shields.io/badge/Security-SSL%20Protected-red?style=for-the-badge](https://img.shields.io/badge/Security-SSL%20Protected-red?style=for-the-badge)" alt="Security">
+  ![Python](https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python&logoColor=white)
+  ![Django](https://img.shields.io/badge/Django-5.1.6-092E20?style=for-the-badge&logo=django&logoColor=white)
+  ![Platform](https://img.shields.io/badge/Platform-Ubuntu%20%7C%20Windows%2011-0078d4?style=for-the-badge&logo=windows&logoColor=white)
+  ![Architecture](https://img.shields.io/badge/Architecture-RBAC%20Compliant-orange?style=for-the-badge)
+  ![Security](https://img.shields.io/badge/Security-SSL%20Protected-red?style=for-the-badge)
 </p>
 
 ## 📌 專案與作者資訊
@@ -137,7 +137,7 @@
 * **資料匯出與列印**：支援將警報趨勢圖表直接匯出為 PDF、PNG、Excel 檔，或呼叫系統原生直接列印[cite: 1]。
 
 ### QR code 列印
-* **標籤即時預覽**：left 側預覽區可隨右側設定連動更新，即時顯示包含操作人員、廢棄物種類、部門及列印時間的貼紙樣式[cite: 1]。
+* **標籤即時預覽**：左側預覽區可隨右側設定連動更新，即時顯示包含操作人員、廢棄物種類、部門及列印時間的貼紙樣式[cite: 1]。
 * **藍牙無線配對**：支援透過瀏覽器 Web Bluetooth 技術，搜尋並無線配對市售藍牙標籤機[cite: 1]。
 * **自訂列印設定**：調整所需部門、廢棄物類型及列印張數後，一鍵派送至實體標籤機產出專屬二維條碼，完成打包[cite: 1]。
 
@@ -249,7 +249,7 @@ CSRF_COOKIE_SECURE=True
 #### 日誌歸檔與輪替控制 (`logrotate`)
 為防止日誌檔案無限制增長導致伺服器磁碟空間耗盡，系統設有以下自動輪替機制：
 * 每次伺服器重新啟動時，會自動打包舊有日誌：命名格式 `YYYY-MM-DD-N.tar.gz`。
-* 系統中每日最大保留 7 個歸檔封包，避免儲存溢出。
+* 系統中每日最大保留 7 個歸檔封包，避免儲流溢出。
 
 ---
 
