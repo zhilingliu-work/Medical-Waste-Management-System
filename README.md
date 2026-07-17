@@ -355,7 +355,12 @@ cp backups/db_目標日期_時間.sqlite3 db.sqlite3
    user.save()
    exit()
 
-### 秤重數據檔案或照片上傳因過大遭阻擋
-* **排除步驟**：編輯 Nginx 站點設定 /etc/nginx/sites-available/mwms，在 server 區塊中放寬上傳大小限制：
-client_max_body_size 500M;
-設定完後重新載入：sudo systemctl reload nginx。
+### Q5：檔案上傳因過大遭阻擋 (413 Request Entity Too Large)
+* **原因分析**：Nginx 預設限制了 HTTP 上傳請求的最大尺寸，導致上傳照片或數據檔案時被攔截。
+* **排除步驟**：
+  1. 使用編輯器開啟 Nginx 設定檔：
+     `sudo nano /etc/nginx/sites-available/mwms`
+  2. 在 `server { ... }` 區塊內加入以下參數：
+     `client_max_body_size 500M;`
+  3. 測試 Nginx 設定檔語法並重載服務：
+     `sudo nginx -t && sudo systemctl reload nginx`
