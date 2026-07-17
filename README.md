@@ -29,46 +29,6 @@
 
 ---
 
-## 📁 專案檔案架構
-
-本專案之目錄樹狀結構與檔案配置如下：
-
-~~~text
-├── .claude/                  # Claude 開發設定與歷史上下文快取
-├── .git/                     # Git 版本控制核心資料夾
-├── access_control/           # 基於角色型存取控制 (RBAC) 權限模組
-├── dashboard_extension/      # 數據儀表板核心擴充與圖表分析模組
-├── logs/                     # 系統日誌儲存資料夾 (自動化歸檔目錄)
-├── Main/                     # Django 系統主路由與專案核心載入點
-├── MedicalWasteManagementSystem/ # 專案組態設定與全域伺服器設定
-├── static/                   # 靜態資源原始檔案 (CSS, JavaScript, Images)
-├── staticfiles/              # 生產環境收集彙整後之靜態檔案目錄
-├── templates/                # 系統前端整合 HTML 頁面模板
-├── waste_system_django-main/ # 醫療廢棄物底層主要子系統模組
-├── WasteManagement/          # 醫療廢棄物申報、入庫、出庫核心邏輯
-├── WastePrediction/          # 廢棄物生成量預測與趨勢分析模組
-├── WasteTransportation/      # 清運車隊物流追蹤與載運車次管理
-├── .env                      # 環境變數設定檔 (已排除於版本控制，保護機密私鑰)
-├── .gitignore                # Git 排除追蹤規則配置檔
-├── CLAUDE.md                 # 開發維護指令指引指南
-├── DATABASE_SCHEMA.md        # 系統資料庫 Schema 結構定義說明書
-├── db.sqlite3                # 本地開發資料庫 (WAL 效能模式)
-├── db.sqlite3-shm            # SQLite 共享記憶體暫存檔
-├── db.sqlite3-wal            # SQLite 預寫式日誌 (Write-Ahead Log) 暫存檔
-├── field_config.json         # 動態欄位配置定義檔
-├── initialize.sh             # 生產環境一鍵自動化部署腳本
-├── logrotate.conf            # 日誌備份與檔案輪替配置規則檔
-├── manage.py                 # Django 命令列工具管理入口
-├── MANUAL_SETUP.txt          # 系統手動建置與設定參考手冊
-├── README.txt                # 部署與維護備忘錄 (原始說明檔)
-├── requirements.txt          # Python 環境依賴套件清單
-├── start-server.sh           # 生產環境 Gunicorn 伺服器啟動控制腳本
-├── stop-server.sh            # 生產環境服務優雅關閉控制腳本
-└── 系統規格書.md              # 醫療廢棄物管理系統規格與詳細分析文件
-~~~
-
----
-
 ## 🛠️ 系統環境需求
 
 本專案在相容性與運作效能上，支援以下硬體與軟體部署規範：
@@ -364,3 +324,43 @@ cp backups/db_目標日期_時間.sqlite3 db.sqlite3
      `client_max_body_size 500M;`
   3. 測試 Nginx 設定檔語法並重載服務：
      `sudo nginx -t && sudo systemctl reload nginx`
+
+---
+
+## 📁 專案檔案架構
+
+本專案之目錄樹狀結構與檔案配置如下：
+
+~~~text
+├── .claude/                  # Claude 開發設定與歷史上下文快取
+├── .git/                     # Git 版本控制核心資料夾
+├── access_control/           # 基於角色型存取控制 (RBAC) 權限模組
+├── dashboard_extension/      # 數據儀表板核心擴充與圖表分析模組
+├── logs/                     # 系統日誌儲存資料夾 (自動化歸檔目錄)
+├── Main/                     # Django 系統主路由與專案核心載入點
+├── MedicalWasteManagementSystem/ # 專案組態設定與全域伺服器設定
+├── static/                   # 靜態資源原始檔案 (CSS, JavaScript, Images)
+├── staticfiles/              # 生產環境收集彙整後之靜態檔案目錄
+├── templates/                # 系統前端整合 HTML 頁面模板
+├── waste_system_django-main/ # 醫療廢棄物底層主要子系統模組
+├── WasteManagement/          # 醫療廢棄物申報、入庫、出庫核心邏輯
+├── WastePrediction/          # 廢棄物生成量預測與趨勢分析模組
+├── WasteTransportation/      # 清運車隊物流追蹤與載運車次管理
+├── .env                      # 環境變數設定檔 (已排除於版本控制，保護機密私鑰)
+├── .gitignore                # Git 排除追蹤規則配置檔
+├── CLAUDE.md                 # 開發維護指令指引指南
+├── DATABASE_SCHEMA.md        # 系統資料庫 Schema 結構定義說明書
+├── db.sqlite3                # 本地開發資料庫 (WAL 效能模式)
+├── db.sqlite3-shm            # SQLite 共享記憶體暫存檔
+├── db.sqlite3-wal            # SQLite 預寫式日誌 (Write-Ahead Log) 暫存檔
+├── field_config.json         # 動態欄位配置定義檔
+├── initialize.sh             # 生產環境一鍵自動化部署腳本
+├── logrotate.conf            # 日誌備份與檔案輪替配置規則檔
+├── manage.py                 # Django 命令列工具管理入口
+├── MANUAL_SETUP.txt          # 系統手動建置與設定參考手冊
+├── README.txt                # 部署與維護備忘錄 (原始說明檔)
+├── requirements.txt          # Python 環境依賴套件清單
+├── start-server.sh           # 生產環境 Gunicorn 伺服器啟動控制腳本
+├── stop-server.sh            # 生產環境服務優雅關閉控制腳本
+└── 系統規格書.md              # 醫療廢棄物管理系統規格與詳細分析文件
+~~~
