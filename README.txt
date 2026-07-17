@@ -1,10 +1,12 @@
 # 🧬 醫療廢棄物暨資源管理系統整合應用
+## 基於 Django 5.1.6 與物聯網全流程勾稽之智慧化醫療廢棄物安全管理系統
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python Version">
   <img src="https://img.shields.io/badge/Django-5.1.6-092E20?style=for-the-badge&logo=django&logoColor=white" alt="Django">
   <img src="https://img.shields.io/badge/Platform-Ubuntu%20%7C%20Windows%2011-0078d4?style=for-the-badge&logo=windows&logoColor=white" alt="Platform">
-  <img src="https://img.shields.io/badge/Award-Winning-emerald?style=for-the-badge" alt="Award">
+  <img src="https://img.shields.io/badge/Architecture-RBAC%20Compliant-orange?style=for-the-badge" alt="Architecture">
+  <img src="https://img.shields.io/badge/Security-SSL%20Protected-red?style=for-the-badge" alt="Security">
 </p>
 
 ## 📌 專案與作者資訊
@@ -31,7 +33,6 @@
 
 本專案之目錄樹狀結構與檔案配置如下：
 
-```text
 ├── .claude/                  # Claude 開發設定與歷史上下文快取
 ├── .git/                     # Git 版本控制核心資料夾
 ├── access_control/           # 基於角色型存取控制 (RBAC) 權限模組
@@ -63,7 +64,6 @@
 ├── start-server.sh           # 生產環境 Gunicorn 伺服器啟動控制腳本
 ├── stop-server.sh            # 生產環境服務優雅關閉控制腳本
 └── 系統規格書.md              # 醫療廢棄物管理系統規格與詳細分析文件
-```
 
 ---
 
@@ -172,13 +172,11 @@
 ### 1. 一鍵自動化部署
 為簡化上線流程，系統附帶 `initialize.sh` 部署指令，可全自動化完成依賴建置：
 
-```bash
 # 賦予部署腳本執行權限
 chmod +x initialize.sh
 
 # 執行部署腳本
 ./initialize.sh
-```
 
 **部署腳本執行細節：**
 1. 偵測 Python 版本，低於 3.12 則自動啟用 PPA 安裝最新 Python 3.12。
@@ -197,7 +195,6 @@ chmod +x initialize.sh
 
 #### A. 憑證檔案放置
 將資訊室或憑證授權機構 (CA) 核發的憑證檔案手動置於系統安全路徑：
-```bash
 # 建立系統專用 SSL 安全目錄
 sudo mkdir -p /etc/ssl/mwms
 sudo chmod 700 /etc/ssl/mwms
@@ -207,27 +204,20 @@ sudo cp cert.pem /etc/ssl/mwms/cert.pem
 sudo cp key.key /etc/ssl/mwms/key.key
 sudo chmod 640 /etc/ssl/mwms/cert.pem /etc/ssl/mwms/key.key
 sudo chown root:www-data /etc/ssl/mwms/cert.pem /etc/ssl/mwms/key.key
-```
 
 #### B. 配置 Nginx 憑證指向
 編輯 Nginx 設定檔 `/etc/nginx/sites-available/mwms`，確認包含以下設定：
-```nginx
 ssl_certificate /etc/ssl/mwms/cert.pem;
 ssl_certificate_key /etc/ssl/mwms/key.key;
-```
 測試 Nginx 設定並重新載入：
-```bash
 sudo nginx -t
 sudo systemctl reload nginx
-```
 
 #### C. 啟用 Django 生產環境安全參數
 編輯生產環境之 `.env.production`，將以下變數設為 `True` 以啟用嚴格瀏覽器安全政策：
-```properties
 SECURE_SSL_REDIRECT=True
 SESSION_COOKIE_SECURE=True
 CSRF_COOKIE_SECURE=True
-```
 
 ---
 
@@ -235,9 +225,9 @@ CSRF_COOKIE_SECURE=True
 系統內置高規格審計日誌，所有日誌皆採用高標準統一格式記錄：
 `YYYY/MM/DD hh:mm:ss.SSS Z+0800 | [類型] | 詳細訊息`
 
-* **實時操作日誌：** `logs/latest.log` (記錄使用者在系統內進行的所有勾稽、警報確認與操作審計)
-* **調試詳細日誌：** `logs/debug.log` (僅開發模式下寫入詳細偵錯日誌)
-* **錯誤追蹤日誌：** `logs/error.log` (記錄系統拋出之非預期例外或錯誤)
+* **實時操作日誌**：`logs/latest.log` (記錄使用者在系統內進行的所有勾稽、警報確認與操作審計)
+* **調試詳細日誌**：`logs/debug.log` (僅開發模式下寫入詳細偵錯日誌)
+* **錯誤追蹤日誌**：`logs/error.log` (記錄系統拋出之非預期例外或錯誤)
 
 #### 日誌歸檔與輪替控制 (`logrotate`)
 為防止日誌檔案無限制增長導致伺服器磁碟空間耗盡，系統設有以下自動輪替機制：
@@ -251,43 +241,34 @@ CSRF_COOKIE_SECURE=True
 
 #### A. Gunicorn Worker 數量最佳化
 編輯 `gunicorn.conf.py` 調整 Worker 執行緒數量，建議配比公式：`(CPU 核心數 × 2) + 1`
-```python
 # 範例：若伺服器 CPU 為 4 核心，建議調整 workers = 9
 workers = 9
-```
 
 #### B. SQLite (WAL mode) 最佳化
 資料庫雖預置 SQLite，但已自動啟用 **WAL (Write-Ahead Log) 預寫日誌模式**。
-* **極大化併發效能：** 實作讀、寫分離，使讀取與寫入操作能並行不悖，適合 50 人以下之中小型醫療院所高頻率秤重登錄。
+* **極大化併發效能**：實作讀、寫分離，使讀取與寫入操作能並行不悖，適合 50 人以下之中小型醫療院所高頻率秤重登錄。
 
 ---
 
 ## 🛠️ 常用系統維護指令表
 
 ### Django 系統維護
-```bash
 source .venv/bin/activate             # 啟動 Python 虛擬環境
 python manage.py migrate              # 執行資料庫遷移
 python manage.py init_system          # 初始化預設系統設定與科室資料
 python manage.py collectstatic        # 彙整前端靜態網頁檔案
-```
 
 ### 服務生命週期控制
-```bash
 ./start-server.sh                     # 啟動 Gunicorn 及背景服務 (含重複啟動防護)
 ./stop-server.sh                      # 安全且優雅關閉伺服器 (附10秒優雅退場緩衝)
 sudo systemctl restart nginx          # 重新啟動 Nginx 網頁伺服器
-```
 
 ### 監控與日誌檢視
-```bash
 tail -f logs/latest.log               # 即時監看使用者操作與警報軌跡
 tail -f logs/error.log                # 追蹤即時系統錯誤
 ls -lh logs/*.tar.gz                  # 檢視已歸檔打包之歷史日誌
-```
 
 ### 資料庫備份與還原
-```bash
 # 建立備份
 mkdir -p backups
 cp db.sqlite3 backups/db_$(date +%Y%m%d_%H%M%S).sqlite3
@@ -297,7 +278,6 @@ cp db.sqlite3-wal backups/ 2>/dev/null || true
 ./stop-server.sh
 cp backups/db_目標日期_時間.sqlite3 db.sqlite3
 ./start-server.sh
-```
 
 ---
 
@@ -317,14 +297,14 @@ cp backups/db_目標日期_時間.sqlite3 db.sqlite3
 ### Q1：無法訪問網站（Nginx 沒反應）
 1. 檢查 Gunicorn 本地服務是否正常運作：
    `ps aux | grep gunicorn`
-2. 確認 Nginx 伺服器狀態：
+2. 確認 Nginx 伺服器端狀態：
    `sudo systemctl status nginx`
 3. 查看伺服器防火牆配置，是否正確放行 HTTP/HTTPS 埠口：
    `sudo ufw status`
 
 ### Q2：502 Bad Gateway 錯誤
-* **原因分析：** 網頁伺服器 Nginx 無法連上後端運行的 Django Gunicorn 服務。
-* **排除步驟：**
+* **原因分析**：網頁伺服器 Nginx 無法連上後端運行的 Django Gunicorn 服務。
+* **排除步驟**：
   1. 確認 Gunicorn 是否監聽本地 `8000` port：
      `netstat -tlnp | grep 8000`
   2. 檢查 `logs/error.log` 查看 Django 崩潰原因。
@@ -332,23 +312,21 @@ cp backups/db_目標日期_時間.sqlite3 db.sqlite3
      `./stop-server.sh && ./start-server.sh`
 
 ### Q3：資料庫發生 Lock 鎖定錯誤
-* **原因分析：** 因多人頻繁寫入，或前次連線異常中斷導致 SQLite 程序併發鎖定。
-* **排除步驟：** 優雅關閉所有進程，待解鎖後重啟即可恢復：
+* **原因分析**：因多人頻繁寫入，或前次連線異常中斷導致 SQLite 程序併發鎖定。
+* **排除步驟**：優雅關閉所有進程，待解鎖後重啟即可恢復：
   `./stop-server.sh`，確認完全無殘留 `gunicorn` 或 `python` 程序後，重啟 `./start-server.sh`。
 
 ### Q4：忘記最高管理員密碼
 1. 登入伺服器端並啟用虛擬環境，進入 Django Shell：
    `source .venv/bin/activate` ➔ `python manage.py shell`
 2. 輸入以下 Python 語法重設密碼：
-   ```python
    from django.contrib.auth.models import User
    user = User.objects.get(username='root')
    user.set_password('您的新密碼')
    user.save()
    exit()
-   ```
 
 ### Q5：秤重數據檔案或照片上傳因過大遭阻擋
-* **排除步驟：** 編輯 Nginx 站點設定 `/etc/nginx/sites-available/mwms`，在 server 區塊中放寬上傳大小限制：
+* **排除步驟**：編輯 Nginx 站點設定 `/etc/nginx/sites-available/mwms`，在 server 區塊中放寬上傳大小限制：
   `client_max_body_size 500M;`
   設定完後重新載入：`sudo systemctl reload nginx`。
