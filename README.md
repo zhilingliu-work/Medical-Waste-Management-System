@@ -2,11 +2,11 @@
 ## 基於 Django 5.1.6 與物聯網全流程勾稽之智慧化醫療廢棄物安全管理系統
 
 <p align="center">
-  ![Python](https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python&logoColor=white)
-  ![Django](https://img.shields.io/badge/Django-5.1.6-092E20?style=for-the-badge&logo=django&logoColor=white)
-  ![Platform](https://img.shields.io/badge/Platform-Ubuntu%20%7C%20Windows%2011-0078d4?style=for-the-badge&logo=windows&logoColor=white)
-  ![Architecture](https://img.shields.io/badge/Architecture-RBAC%20Compliant-orange?style=for-the-badge)
-  ![Security](https://img.shields.io/badge/Security-SSL%20Protected-red?style=for-the-badge)
+  <img src="[https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python&logoColor=white](https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python&logoColor=white)" alt="Python Version">
+  <img src="[https://img.shields.io/badge/Django-5.1.6-092E20?style=for-the-badge&logo=django&logoColor=white](https://img.shields.io/badge/Django-5.1.6-092E20?style=for-the-badge&logo=django&logoColor=white)" alt="Django">
+  <img src="[https://img.shields.io/badge/Platform-Ubuntu%20%7C%20Windows%2011-0078d4?style=for-the-badge&logo=windows&logoColor=white](https://img.shields.io/badge/Platform-Ubuntu%20%7C%20Windows%2011-0078d4?style=for-the-badge&logo=windows&logoColor=white)" alt="Platform">
+  <img src="[https://img.shields.io/badge/Architecture-RBAC%20Compliant-orange?style=for-the-badge](https://img.shields.io/badge/Architecture-RBAC%20Compliant-orange?style=for-the-badge)" alt="Architecture">
+  <img src="[https://img.shields.io/badge/Security-SSL%20Protected-red?style=for-the-badge](https://img.shields.io/badge/Security-SSL%20Protected-red?style=for-the-badge)" alt="Security">
 </p>
 
 ## 📌 專案與作者資訊
@@ -33,7 +33,7 @@
 
 本專案之目錄樹狀結構與檔案配置如下：
 
-```text
+~~~text
 ├── .claude/                  # Claude 開發設定與歷史上下文快取
 ├── .git/                     # Git 版本控制核心資料夾
 ├── access_control/           # 基於角色型存取控制 (RBAC) 權限模組
@@ -65,7 +65,7 @@
 ├── start-server.sh           # 生產環境 Gunicorn 伺服器啟動控制腳本
 ├── stop-server.sh            # 生產環境服務優雅關閉控制腳本
 └── 系統規格書.md              # 醫療廢棄物管理系統規格與詳細分析文件
-```
+~~~
 
 ---
 
@@ -73,12 +73,12 @@
 
 本專案在相容性與運作效能上，支援以下硬體與軟體部署規範：
 
-### 1. 硬體規格建議
+### 硬體規格建議
 * **中央處理器 (CPU)：** 2 核心以上 (Production 建議); 本地端測試於 AMD Ryzen 7 4800H 運行流暢。
 * **隨機存取記憶體 (RAM)：** 4GB 以上 (建議使用 8GB DDR4 以上，以保障 Nginx 及 Gunicorn 高併發負載)。
 * **硬碟空間 (Disk Space)：** 最少 20GB 固態硬碟 (SSD) 空間。
 
-### 2. 軟體環境相容
+### 軟體環境相容
 * **開發與測試環境：** Windows 11 (64位元)
 * **生產部署環境：** Ubuntu 22.04 LTS 或更新版本 (建議 22.04 或 24.04)
 * **Python 版本：** Python 3.12+ (若部署環境低於 3.12，自動化腳本將自動安裝補足)
@@ -91,21 +91,21 @@
 
 系統規劃了完整的 **6 大使用者身分組**，各角色具備嚴格的權限劃分與對應可用功能：
 
-1. **根帳號 (root)**[cite: 1]：
-   * 系統最高權限管理員[cite: 1]。
-   * 獨佔可管理 Django Administration（本系統帳號管理底層框架）[cite: 1]。
-   * 唯有具備伺服器管理權限的使用者，才能動態管理一般事業廢棄物之欄位資訊[cite: 1]。
-2. **管理者 (manager)**[cite: 1]：
-   * 負責系統營運配置與高階審核，可操作【後台管理】與所有基本配置物件設定[cite: 1]。
-3. **行政人員 (staff)**[cite: 1]：
-   * 負責院內日常行政作業，包括過磅與載運紀錄查詢、結算載運單、生成統計報表[cite: 1]。
-4. **登錄者 (loginer)**[cite: 1]：
-   * 日常資料維護人員，協助處理基礎系統資料登記[cite: 1]。
-5. **匯入者 (importer)**[cite: 1]：
-   * 負責批次外部數據與歷史資料匯入系統[cite: 1]。
-6. **外部人員 (outer)**[cite: 1]：
-   * 現場實體清運與作業人員[cite: 1]。
-   * 負責在現場操作【行動裝置登記】與【QR code列印】[cite: 1]。
+* **根帳號 (root)**[cite: 1]：
+  * 系統最高權限管理員[cite: 1]。
+  * 獨佔可管理 Django Administration（本系統帳號管理底層框架）[cite: 1]。
+  * 唯有具備伺服器管理權限的使用者，才能動態管理一般事業廢棄物之欄位資訊[cite: 1]。
+* **管理者 (manager)**[cite: 1]：
+  * 負責系統營運配置與高階審核，可操作【後台管理】與所有基本配置物件設定[cite: 1]。
+* **行政人員 (staff)**[cite: 1]：
+  * 負責院內日常行政作業，包括過磅與載運紀錄查詢、結算載運單、生成統計報表[cite: 1]。
+* **登錄者 (loginer)**[cite: 1]：
+  * 日常資料維護人員，協助處理基礎系統資料登記[cite: 1]。
+* **匯入者 (importer)**[cite: 1]：
+  * 負責批次外部數據與歷史資料匯入系統[cite: 1]。
+* **外部人員 (outer)**[cite: 1]：
+  * 現場實體清運與作業人員[cite: 1]。
+  * 負責在現場操作【行動裝置登記】與【QR code列印】[cite: 1]。
 
 ---
 
@@ -171,16 +171,16 @@
 
 ## 🚀 生產環境部署指南
 
-### 1. 一鍵自動化部署
+### 一鍵自動化部署
 為簡化上線流程，系統附帶 `initialize.sh` 部署指令，可全自動化完成依賴建置：
 
-```bash
+~~~bash
 # 賦予部署腳本執行權限
 chmod +x initialize.sh
 
 # 執行部署腳本
 ./initialize.sh
-```
+~~~
 
 **部署腳本執行細節：**
 1. 偵測 Python 版本，低於 3.12 則自動啟用 PPA 安裝最新 Python 3.12。
@@ -194,13 +194,13 @@ chmod +x initialize.sh
 
 ---
 
-### 2. SSL/HTTPS 安全憑證配置
+### SSL/HTTPS 安全憑證配置
 為確保醫療資料在網路傳輸中不被竊聽，系統預置 SSL 安全導向支援：
 
-#### A. 憑證檔案放置
+#### 憑證檔案放置
 將資訊室或憑證授權機構 (CA) 核發的憑證檔案手動置於系統安全路徑：
 
-```bash
+~~~bash
 # 建立系統專用 SSL 安全目錄
 sudo mkdir -p /etc/ssl/mwms
 sudo chmod 700 /etc/ssl/mwms
@@ -210,35 +210,35 @@ sudo cp cert.pem /etc/ssl/mwms/cert.pem
 sudo cp key.key /etc/ssl/mwms/key.key
 sudo chmod 640 /etc/ssl/mwms/cert.pem /etc/ssl/mwms/key.key
 sudo chown root:www-data /etc/ssl/mwms/cert.pem /etc/ssl/mwms/key.key
-```
+~~~
 
-#### B. 配置 Nginx 憑證指向
+#### 配置 Nginx 憑證指向
 編輯 Nginx 設定檔 `/etc/nginx/sites-available/mwms`，確認包含以下設定：
 
-```nginx
+~~~nginx
 ssl_certificate /etc/ssl/mwms/cert.pem;
 ssl_certificate_key /etc/ssl/mwms/key.key;
-```
+~~~
 
 測試 Nginx 設定並重新載入：
 
-```bash
+~~~bash
 sudo nginx -t
 sudo systemctl reload nginx
-```
+~~~
 
-#### C. 啟用 Django 生產環境安全參數
+#### 啟用 Django 生產環境安全參數
 編輯生產環境之 `.env.production`，將以下變數設為 `True` 以啟用嚴格瀏覽器安全政策：
 
-```properties
+~~~properties
 SECURE_SSL_REDIRECT=True
 SESSION_COOKIE_SECURE=True
 CSRF_COOKIE_SECURE=True
-```
+~~~
 
 ---
 
-### 3. 智慧日誌系統與自動歸檔
+### 智慧日誌系統與自動歸檔
 系統內置高規格審計日誌，所有日誌皆採用高標準統一格式記錄：
 `YYYY/MM/DD hh:mm:ss.SSS Z+0800 | [類型] | 詳細訊息`
 
@@ -249,22 +249,22 @@ CSRF_COOKIE_SECURE=True
 #### 日誌歸檔與輪替控制 (`logrotate`)
 為防止日誌檔案無限制增長導致伺服器磁碟空間耗盡，系統設有以下自動輪替機制：
 * 每次伺服器重新啟動時，會自動打包舊有日誌：命名格式 `YYYY-MM-DD-N.tar.gz`。
-* 系統中每日最大保留 7 個歸檔封包，避免儲流溢出。
+* 系統中每日最大保留 7 個歸檔封包，避免儲存溢出。
 
 ---
 
-### 4. 伺服器效能調優
+### 伺服器效能調優
 為因應大型醫療機構中多科室同時上線申報、秤重的高併發量負荷，系統進行了以下調優：
 
-#### A. Gunicorn Worker 數量最佳化
+#### Gunicorn Worker 數量最佳化
 編輯 `gunicorn.conf.py` 調整 Worker 執行緒數量，建議配比公式：`(CPU 核心數 × 2) + 1`
 
-```python
+~~~python
 # 範例：若伺服器 CPU 為 4 核心，建議調整 workers = 9
 workers = 9
-```
+~~~
 
-#### B. SQLite (WAL mode) 最佳化
+#### SQLite (WAL mode) 最佳化
 資料庫雖預置 SQLite，但已自動啟用 **WAL (Write-Ahead Log) 預寫日誌模式**。
 * **極大化併發效能**：實作讀、寫分離，使讀取與寫入操作能並行不悖，適合 50 人以下之中小型醫療院所高頻率秤重登錄。
 
@@ -278,86 +278,3 @@ source .venv/bin/activate             # 啟動 Python 虛擬環境
 python manage.py migrate              # 執行資料庫遷移
 python manage.py init_system          # 初始化預設系統設定與科室資料
 python manage.py collectstatic        # 彙整前端靜態網頁檔案
-```
-
-### 服務生命週期控制
-```bash
-./start-server.sh                     # 啟動 Gunicorn 及背景服務 (含重複啟動防護)
-./stop-server.sh                      # 安全且優雅關閉伺服器 (附10秒優雅退場緩衝)
-sudo systemctl restart nginx          # 重新啟動 Nginx 網頁伺服器
-```
-
-### 監控與日誌檢視
-```bash
-tail -f logs/latest.log               # 即時監看使用者操作與警報軌跡
-tail -f logs/error.log                # 追蹤即時系統錯誤
-ls -lh logs/*.tar.gz                  # 檢視已歸檔打包之歷史日誌
-```
-
-### 資料庫備份與還原
-```bash
-# 建立備份
-mkdir -p backups
-cp db.sqlite3 backups/db_$(date +%Y%m%d_%H%M%S).sqlite3
-cp db.sqlite3-wal backups/ 2>/dev/null || true
-
-# 還原備份
-./stop-server.sh
-cp backups/db_目標日期_時間.sqlite3 db.sqlite3
-./start-server.sh
-```
-
----
-
-## 📋 上線前安全檢查清單 (Pre-launch Checklist)
-
-- [ ] **DEBUG 模式關閉：** 確認 `.env.production` 中 `DEBUG=False`。
-- [ ] **金鑰保密：** `SECRET_KEY` 已重構為強隨機高強度金鑰，且 `.env.production` 權限已設為 `600`。
-- [ ] **主機名保護：** `ALLOWED_HOSTS` 僅允許設定之醫院網域或指定生產 IP。
-- [ ] **防火牆鎖定：** 防火牆僅開放 `80` (HTTP), `443` (HTTPS) 連線，後端 `8000` 連接埠已設為外部不可直接連線。
-- [ ] **SSL 加密就緒：** HTTPS 安全憑證安裝無誤，瀏覽器鎖頭正確顯示且支援強導向（HTTP 自動跳轉 HTTPS）。
-- [ ] **資料庫 WAL 啟用：** 資料庫讀寫測試正常，備份排程已加入 crontab。
-
----
-
-## 🔍 常見問題與排除 (FAQ)
-
-### Q1：無法訪問網站（Nginx 沒反應）
-1. 檢查 Gunicorn 本地服務是否正常運作：
-   `ps aux | grep gunicorn`
-2. 確認 Nginx 伺服器端狀態：
-   `sudo systemctl status nginx`
-3. 查看伺服器防火牆配置，是否正確放行 HTTP/HTTPS 埠口：
-   `sudo ufw status`
-
-### Q2：502 Bad Gateway 錯誤
-* **原因分析**：網頁伺服器 Nginx 無法連上後端運行的 Django Gunicorn 服務。
-* **排除步驟**：
-  1. 確認 Gunicorn 是否監聽本地 `8000` port：
-     `netstat -tlnp | grep 8000`
-  2. 檢查 `logs/error.log` 查看 Django 崩潰原因。
-  3. 重啟系統服務：
-     `./stop-server.sh && ./start-server.sh`
-
-### Q3：資料庫發生 Lock 鎖定錯誤
-* **原因分析**：因多人頻繁寫入，或前次連線異常中斷導致 SQLite 程序併發鎖定。
-* **排除步驟**：優雅關閉所有進程，待解鎖後重啟即可恢復：
-  `./stop-server.sh`，確認完全無殘留 `gunicorn` 或 `python` 程序後，重啟 `./start-server.sh`。
-
-### Q4：忘記最高管理員密碼
-1. 登入伺服器端並啟用虛擬環境，進入 Django Shell：
-   `source .venv/bin/activate` ➔ `python manage.py shell`
-2. 輸入以下 Python 語法重設密碼：
-   ```python
-   from django.contrib.auth.models import User
-   user = User.objects.get(username='root')
-   user.set_password('您的新密碼')
-   user.save()
-   exit()
-   ```
-
-### Q5：秤重數據檔案或照片上傳因過大遭阻擋
-* **排除步驟**：編輯 Nginx 站點設定 `/etc/nginx/sites-available/mwms`，在 server 區塊中放寬上傳大小限制：
-  `client_max_body_size 500M;`
-  設定完後重新載入：`sudo systemctl reload nginx`。
-```
